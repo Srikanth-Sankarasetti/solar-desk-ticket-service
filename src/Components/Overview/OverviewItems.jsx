@@ -90,7 +90,7 @@ export const CustomePieChart = ({ data, title, loadingState }) => {
             wrapperClass=""
           />
         ) : (
-          <div style={{ margin: "1rem 0" }}>
+          <>
             <StyledPichartHeader>{title}</StyledPichartHeader>
             <ResponsiveContainer width="100%">
               <PieChart>
@@ -127,7 +127,7 @@ export const CustomePieChart = ({ data, title, loadingState }) => {
                 <Legend layout="vertical" verticalAlign="top" align="right" />
               </PieChart>
             </ResponsiveContainer>
-          </div>
+          </>
         )}
       </StyledOverViewPieContainer>
     </>
