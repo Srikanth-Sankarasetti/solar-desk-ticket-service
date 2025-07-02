@@ -62,9 +62,9 @@ const OverViewCartsData = ({ currentData, previousData, loadingState }) => {
         loadingState={loadingState}
         unit="Items"
         status={
-          activeTotaltrendRaw <= 0
+          activeTotaltrendRaw <= 10
             ? "optimal"
-            : activeTotaltrendRaw > 0 && activeTotaltrendRaw <= 10
+            : activeTotaltrendRaw > 10 && activeTotaltrendRaw <= 20
             ? "warning"
             : "critical"
         }
@@ -111,9 +111,9 @@ const OverViewCartsData = ({ currentData, previousData, loadingState }) => {
         loadingState={loadingState}
         unit="Kwh"
         status={
-          ActiveGenrationLossTrend <= 0
+          ActiveGenrationLossTrend <= 10
             ? "optimal"
-            : ActiveGenrationLossTrend <= 10
+            : ActiveGenrationLossTrend <= 20
             ? "warning"
             : "critical"
         }
