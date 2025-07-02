@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState, useNavigate } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const VerfyEmail = () => {
@@ -32,7 +32,21 @@ const VerfyEmail = () => {
     verifyEmail();
   }, [token]);
 
-  return <h2 style={{ textAlign: "center", marginTop: "3rem" }}>{message}</h2>;
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <div>
+        <h2 style={{ textAlign: "center", marginTop: "3rem" }}>{message}</h2>
+      </div>
+    </div>
+  );
 };
 
 export default VerfyEmail;
