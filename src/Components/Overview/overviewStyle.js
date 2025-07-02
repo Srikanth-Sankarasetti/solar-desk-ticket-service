@@ -197,7 +197,6 @@ export const StyledOverviewPiechartMainContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   width: 100%;
-  margin: 1rem 0;
   @media (max-width: 1000px) {
     grid-template-columns: auto;
   }
@@ -216,7 +215,7 @@ export const StyledOverViewPieContainer = styled.div`
 export const StyledPichartHeader = styled.h3`
   color: var(--textBody);
   text-align: center;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 `;
 
 export const StyledOverViewTopPlantContainer = styled.div`
