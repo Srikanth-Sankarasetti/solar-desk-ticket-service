@@ -106,6 +106,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<AccountCreation />} />
               <Route path="/forgot-password" element={<ForgotPassowrd />} />
+              <Route path="verify-email/:token" element={<VerfyEmail />} />
+              <Route path="reset-password/:token" element={<ResetPassowrd />} />
             </Route>
             <Route
               path="/"
@@ -128,8 +130,7 @@ function App() {
               <Route path="tickets" element={<TicketComponent />} />
               <Route path="settings" element={<Settings />} />
               <Route path="issue-update/:id" element={<IssuesUpdate />} />
-              <Route path="verify-email/:token" element={<VerfyEmail />} />
-              <Route path="reset-password/:token" element={<ResetPassowrd />} />
+
               <Route path="*" element={<Navigate to="/not-found" />} />
               <Route path="not-found" element={<NotFound />} />
             </Route>
