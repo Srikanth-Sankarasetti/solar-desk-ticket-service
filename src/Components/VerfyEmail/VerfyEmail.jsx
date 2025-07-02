@@ -20,7 +20,7 @@ const VerfyEmail = () => {
           toast.success("Email Verfied Succesfully");
           setTimeout(() => {
             navigate("/login"); // ✅ redirect after 2 seconds
-          }, 60000);
+          }, 5000);
         } else {
           setMessage("❌ Verification failed or expired.");
         }
