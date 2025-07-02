@@ -58,7 +58,7 @@ const IssueUpdateForm = () => {
   const handleSubmitedIssue = async (data) => {
     try {
       const result = await makeApi({
-        url: `http://localhost:3000/api/solar/v1/issues/${id}`,
+        url: `https://solar-desk.onrender.com/api/solar/v1/issues/${id}`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
