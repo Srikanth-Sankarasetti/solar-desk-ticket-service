@@ -23,7 +23,7 @@ const OverViewCartsData = ({ currentData, previousData, loadingState }) => {
 
   //total tickets caluculations
   const activeTotaltrendRaw =
-    previousData?.totalIssues || 0
+    previousData?.totalIssues > 0
       ? ((currentData?.totalIssues - previousData?.totalIssues) /
           previousData?.totalIssues) *
         100
@@ -35,7 +35,7 @@ const OverViewCartsData = ({ currentData, previousData, loadingState }) => {
   //resolutionRate calaucualtion
 
   const activeResolutionTrend =
-    previousData?.resolutionRate || 0
+    previousData?.resolutionRate > 0
       ? ((currentData?.resolutionRate - previousData?.resolutionRate) /
           previousData?.resolutionRate) *
         100
@@ -45,7 +45,7 @@ const OverViewCartsData = ({ currentData, previousData, loadingState }) => {
 
   //GenrationLoss Caluculation
   const ActiveGenrationLossTrend =
-    previousData?.generationLossKwh || 0
+    previousData?.generationLossKwh > 0
       ? ((currentData?.generationLossKwh - previousData?.generationLossKwh) /
           previousData?.generationLossKwh) *
         100
