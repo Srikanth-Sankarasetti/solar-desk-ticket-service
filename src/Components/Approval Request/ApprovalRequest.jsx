@@ -36,7 +36,7 @@ const ApprovalRequest = () => {
       const statusUpdate = {
         status: "approved",
       };
-      console.log(id);
+
       const result = await makeApi({
         url: `https://solar-desk.onrender.com/api/solar/v1/users/approve/${id}`,
         method: "POST",

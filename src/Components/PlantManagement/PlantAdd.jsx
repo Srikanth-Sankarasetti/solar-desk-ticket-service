@@ -38,7 +38,6 @@ const PlantAdd = () => {
   const token = Cookies.get("token");
 
   const handleAddPlantSubmitForm = async (data) => {
-    console.log(data);
     try {
       const result = await makeApi({
         url: "https://solar-desk.onrender.com/api/solar/v1/plants",

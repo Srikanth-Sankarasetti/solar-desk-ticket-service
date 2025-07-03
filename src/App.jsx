@@ -67,7 +67,6 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "transparent",
           backgroundColor: "rgba(255, 255, 255, 0.2)", // ✅ semi-transparent
           backdropFilter: "blur(6px)", // ✅ adds background blur
           WebkitBackdropFilter: "blur(6px)", // ✅ Safari support

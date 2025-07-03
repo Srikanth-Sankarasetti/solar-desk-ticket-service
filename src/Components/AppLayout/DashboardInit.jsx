@@ -25,7 +25,7 @@ const DashboardInit = ({ children }) => {
 
       if (result?.status === "success") {
         const usersFilteration = result.data.users
-          .filter((user) => user.isEmailVerfied && user._id !== id)
+          .filter((user) => user.isEmailVerfied)
           .map((user) => ({
             id: user._id,
             name: user.name,
@@ -84,7 +84,6 @@ const DashboardInit = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (result?.status === "success") {
         const plantsFilteration = result.data.plants.map((user) => ({
           id: user._id,
@@ -132,6 +131,7 @@ const DashboardInit = ({ children }) => {
           plantName: issue.plantName,
           raisedByName: issue.raisedByName,
           assignedEngineerName: issue.assignedEngineerName,
+          zone: issue.Zone,
           plantCapacityKwp: issue.plantCapacityKwp,
           category: issue.category,
           subIssue: issue.subIssue,

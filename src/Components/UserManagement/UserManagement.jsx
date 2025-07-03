@@ -17,7 +17,7 @@ import { ThreeCircles } from "react-loader-spinner";
 const UserManagement = () => {
   const [search, setSearch] = useState("");
   const { makeApi } = useApiRequest();
-  const { isLoading, state, dispatch } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
 
   const token = Cookies.get("token");
 
@@ -170,7 +170,7 @@ const UserManagement = () => {
         />
       </div>
       <StyledUserManagementTableList role="table">
-        <StyledUserManagmentTableHeader role="row" tab="management">
+        <StyledUserManagmentTableHeader role="row" $tab="management">
           <div>Name</div>
           <div>Email</div>
           <div>Role</div>

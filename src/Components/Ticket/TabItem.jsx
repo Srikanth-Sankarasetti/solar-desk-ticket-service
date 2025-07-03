@@ -2,13 +2,13 @@ import { styled } from "styled-components";
 
 const StyledTicketTabItem = styled.li`
   color: ${(props) =>
-    props.isActive ? "var(--statusTabTextActive)" : "var(--statusTabText)"};
+    props.$isActive ? "var(--statusTabTextActive)" : "var(--statusTabText)"};
   border-bottom: 3px solid
     ${(props) =>
       props.isActive
-        ? props.tabId === "open"
+        ? props.$tabId === "open"
           ? "var(--statusOpenBorder)"
-          : props.tabId === "resolved"
+          : props.$tabId === "resolved"
           ? "var(--statusResolvedBorder)"
           : "var(--statusProgressBorder)"
         : "transparent"};
@@ -28,8 +28,8 @@ const TabItem = (props) => {
 
   return (
     <StyledTicketTabItem
-      isActive={isActive}
-      tabId={tabDetails.tabId}
+      $isActive={isActive}
+      $tabId={tabDetails.tabId}
       onClick={tabClick}
     >
       {tabDetails.displayText}

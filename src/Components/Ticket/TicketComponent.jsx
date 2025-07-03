@@ -31,14 +31,21 @@ const tabList = [
 const TicketComponent = () => {
   const [tabId, setStatus] = useState(tabList[0].tabId);
   const [issuesPlants, setIssuesPlants] = useState([]);
+  const [zone, setZone] = useState("");
+  const [engineerId, setEngineerId] = useState("");
   const [expandedId, setExpandedId] = useState(null);
   const { role, name } = getUserDate();
   const { state } = useGlobalContext();
   useEffect(() => {
     if (role === "admin" || role === "manager") {
-      const filterIssues = state?.issuesPlants.filter(
-        (plants) => plants.status === tabId
-      );
+      const filterIssues = state?.issuesPlants.filter((plants) => {
+        const matchStatus = plants.status === tabId;
+        const matchZone = zone ? plants.zone === zone : true;
+        const matchedEngineer = engineerId
+          ? plants.assignedEngineerName === engineerId
+          : true;
+        return matchStatus && matchZone && matchedEngineer;
+      });
 
       setIssuesPlants(filterIssues);
       setExpandedId(null);
@@ -50,7 +57,7 @@ const TicketComponent = () => {
       setIssuesPlants(filterIssues);
       setExpandedId(null);
     }
-  }, [tabId, state]);
+  }, [tabId, state, zone, engineerId]);
 
   const updateTabId = (id) => {
     setStatus(id);
@@ -89,9 +96,9 @@ const TicketComponent = () => {
     return (
       <div
         style={{
-          width: "90%",
-          height: "50%",
-          minHeight: "400px",
+          width: "100%",
+          height: "cal(100vh - 200px)",
+          overflowY: "auto",
           display: "flex",
           flexDirection: "column",
           gap: "1.5rem",
@@ -145,8 +152,9 @@ const TicketComponent = () => {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
-          position: "relative",
+          alignItems: "center",
         }}
       >
         <StyledTicketUl>
@@ -159,7 +167,69 @@ const TicketComponent = () => {
             />
           ))}
         </StyledTicketUl>
+        <div
+          style={{
+            display: "flex",
+            gap: "2rem",
+            width: "100%",
+            alignSelf: "center",
+            marginTop: "1.3rem",
+          }}
+        >
+          {(role === "admin" || role === "manager") && (
+            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+              <h1 style={{ fontSize: "1.2rem", color: "var(--textBody)" }}>
+                Select Region
+              </h1>
+              <select
+                value={zone}
+                onChange={(e) => setZone(e.target.value)}
+                style={{
+                  width: "105px",
+                  height: "25px",
+                  borderRadius: "5px",
+                  backgroundColor: "var(--inputBg)",
+                  color: "var(--textBody)",
+                  outline: "none",
+                }}
+              >
+                <option value="">Select Region</option>
+                <option value="East">East</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="West">West</option>
+              </select>
+            </div>
+          )}
+          {(role === "admin" || role === "manager") && (
+            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+              <h1 style={{ fontSize: "1.2rem", color: "var(--textBody)" }}>
+                Select Engineer
+              </h1>
+              <select
+                value={engineerId}
+                onChange={(e) => setEngineerId(e.target.value)}
+                style={{
+                  width: "115px",
+                  height: "25px",
+                  borderRadius: "5px",
+                  backgroundColor: "var(--inputBg)",
+                  color: "var(--textBody)",
+                  outline: "none",
+                }}
+              >
+                <option value="">Select Engineer</option>
+                {state.users.map((user) => (
+                  <option key={user.id} value={user.name}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
       </div>
+
       <TableList role="table">
         <TableHeader role="row" $isResolved={tabId}>
           {tabId === "resolved" && <div></div>}

@@ -33,7 +33,7 @@ const UseList = ({
   };
 
   return (
-    <StyledUserManagementTableRow role="row" tab="management">
+    <StyledUserManagementTableRow role="row" $tab="management">
       <div>{users.name}</div>
       <div>{users.email}</div>
       <div>{users.role}</div>

@@ -18,8 +18,7 @@ export const StyledPlantSelectionButtonContainer = styled.div`
 `;
 
 export const StyledChevronDown = styled(ChevronDown)`
-  transform: ${({ "data-is-open": isOpen }) =>
-    isOpen ? "rotate(180deg)" : "rotate(0deg)"};
+  transform: ${({ $isOpen }) => ($isOpen ? "rotate(180deg)" : "rotate(0deg)")};
   transition: all 200ms ease-in;
 `;
 

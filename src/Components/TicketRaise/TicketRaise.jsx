@@ -38,15 +38,12 @@ const TicketRaise = () => {
 
   const handleSubmitForm = async (data) => {
     const selectedPlant = state.plants.find((p) => p.id === data.plantId);
-    console.log(selectedPlant);
-    console.log(state.users);
+
     const assignedengineer = state.users.find(
       (p) =>
         p.name === selectedPlant?.ownerName ||
         p.id === selectedPlant?.plantOwner
     );
-    console.log(assignedengineer);
-    console.log(data);
 
     try {
       const result = await makeApi({
@@ -58,6 +55,7 @@ const TicketRaise = () => {
         },
         body: data,
       });
+
       if (result?.status === "success") {
         const addedIssuePlant = [
           ...state.issuesPlants,
@@ -82,7 +80,6 @@ const TicketRaise = () => {
       }
     } catch (err) {
       toast.error(err.message);
-      console.log(err);
     }
   };
 

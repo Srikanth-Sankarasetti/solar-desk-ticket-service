@@ -24,7 +24,7 @@ export const StyledUserManagmentTableHeader = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: ${(props) =>
-    props.tab === "management" ? "repeat(6, 1fr)" : "repeat(5, 1fr)"};
+    props.$tab === "management" ? "repeat(6, 1fr)" : "repeat(5, 1fr)"};
   color: var(--textHeader);
   font-size: 1.4rem;
   font-weight: 500;
@@ -41,7 +41,7 @@ export const StyledUserManagementTableRow = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: ${(props) =>
-    props.tab === "management" ? "repeat(6, 1fr) " : "repeat(5, 1fr)"};
+    props.$tab === "management" ? "repeat(6, 1fr) " : "repeat(5, 1fr)"};
   color: var(--textBody);
   gap: 2rem;
   padding: 1rem 1rem;
