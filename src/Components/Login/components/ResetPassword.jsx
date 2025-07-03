@@ -30,6 +30,7 @@ const ResetPassowrd = () => {
   const [newPassword, setNewPassowrd] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [isPassowrdShow, setPasswordShow] = useState(false);
+  const [passwordmatcherror, setPasswordMatchError] = useState("");
   const { isLoading, error, makeApi } = useApiRequest();
 
   const formdata = async (e) => {
@@ -94,13 +95,24 @@ const ResetPassowrd = () => {
             )}
           </HidePassword>
         </PassowrdContainer>
-        <InputLabel htmlFor="confirmPassword">New Password :</InputLabel>
+        <InputLabel htmlFor="confirmPassword">Confirm Password :</InputLabel>
         <EmailInput
           autoFocus
           id="confirmPassword"
           placeholder="Confirm Password"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            setConfirmPassword(value);
+
+            if (newPassword !== value) {
+              setPasswordMatchError(
+                "New password and confirm password do not match"
+              );
+            } else {
+              setPasswordMatchError(""); // Clear the error if matched
+            }
+          }}
         />
 
         <SubmitButton type="submit">
@@ -118,6 +130,7 @@ const ResetPassowrd = () => {
           )}
         </SubmitButton>
         {error && <ErrorPara>* {error}</ErrorPara>}
+        {passwordmatcherror && <ErrorPara>* {passwordmatcherror}</ErrorPara>}
         <ExternalContainer>
           <Navlink to="/login">Login</Navlink>
           <Navlink to="/signup">Signup</Navlink>
