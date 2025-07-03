@@ -5,7 +5,7 @@ const StyledTicketTabItem = styled.li`
     props.$isActive ? "var(--statusTabTextActive)" : "var(--statusTabText)"};
   border-bottom: 3px solid
     ${(props) =>
-      props.isActive
+      props.$isActive
         ? props.$tabId === "open"
           ? "var(--statusOpenBorder)"
           : props.$tabId === "resolved"
