@@ -35,6 +35,10 @@ const ResetPassowrd = () => {
 
   const formdata = async (e) => {
     e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      setPasswordMatchError("New password and confirm password do not match");
+      return;
+    }
     const data = {
       password: newPassword,
       confirmPassword,
@@ -51,7 +55,10 @@ const ResetPassowrd = () => {
         navigate("/login", { replace: true });
       }
     } catch (err) {
-      toast.error(`${err.message}, please resend token again`);
+      // 🛑 Error from backend (e.g., token expired or invalid)
+      toast.error(
+        `${err?.response?.data?.message || err.message}, please resend token`
+      );
       navigate("/forgot-password", { replace: true });
     }
   };
