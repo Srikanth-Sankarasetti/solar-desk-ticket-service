@@ -50,12 +50,9 @@ const ResetPassowrd = () => {
         toast.success(`${response.message}, please login`);
         navigate("/login", { replace: true });
       }
-      if (response?.status === "fail") {
-        toast.error(`${response.message}, please resend token again`);
-        navigate("/forgot-password", { replace: true });
-      }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(`${err.message}, please resend token again`);
+      navigate("/forgot-password", { replace: true });
     }
   };
 
