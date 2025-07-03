@@ -38,6 +38,7 @@ const PlantAdd = () => {
   const token = Cookies.get("token");
 
   const handleAddPlantSubmitForm = async (data) => {
+    console.log(data);
     try {
       const result = await makeApi({
         url: "https://solar-desk.onrender.com/api/solar/v1/plants",
@@ -119,7 +120,7 @@ const PlantAdd = () => {
           <StyledRaisedTicketLable htmlFor="zone">
             Add Zone
           </StyledRaisedTicketLable>
-          <StyledAddPlantSelect defaultValue="" id="zone" {...register("zone")}>
+          <StyledAddPlantSelect defaultValue="" id="zone" {...register("Zone")}>
             <option value="" disabled>
               Select Zone
             </option>

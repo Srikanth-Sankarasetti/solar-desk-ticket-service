@@ -1,7 +1,10 @@
 import * as yup from "yup";
 
 const issueUpdateSchema = yup.object().shape({
-  actionDescription: yup.string().required("Action Description Required"),
+  actionDescription: yup
+    .string()
+    .trim()
+    .required("Action Description Required"),
   category: yup.string().required("Category Required"),
   subIssue: yup.string(),
   status: yup.string().required("status is required"),

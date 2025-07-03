@@ -1,9 +1,10 @@
 import * as yup from "yup";
 
 export const schema = yup.object().shape({
-  name: yup.string().required("* Name Field Required"),
+  name: yup.string().trim().required("* Name Field Required"),
   email: yup
     .string()
+    .trim()
     .email("Enter a valid email")
     .required("* Email is required")
     .matches(
@@ -12,6 +13,7 @@ export const schema = yup.object().shape({
     ),
   password: yup
     .string()
+    .trim()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters")
     .matches(/[A-Z]/, "* Must include at least one uppercase letter")
@@ -23,6 +25,7 @@ export const schema = yup.object().shape({
     ),
   confirmPassword: yup
     .string()
+    .trim()
     .oneOf(
       [yup.ref("password"), null],
       "* Password & confirmPassowrd Should be Match"
