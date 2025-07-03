@@ -12,11 +12,12 @@ import useApiRequest from "../../ui/apiRequest";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useGlobalContext } from "../../ui/globalContext";
+import { ThreeCircles } from "react-loader-spinner";
 
 const UserManagement = () => {
   const [search, setSearch] = useState("");
   const { makeApi } = useApiRequest();
-  const { state, dispatch } = useGlobalContext();
+  const { isLoading, state, dispatch } = useGlobalContext();
 
   const token = Cookies.get("token");
 
@@ -57,7 +58,7 @@ const UserManagement = () => {
   const deletedUserFromServer = async (id) => {
     try {
       const result = await makeApi({
-        url: `http://localhost:3000/api/solar/v1/users/${id}/delete`,
+        url: `https://solar-desk.onrender.com/api/solar/v1/users/${id}/delete`,
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -72,6 +73,79 @@ const UserManagement = () => {
     } catch (err) {
       toast.error(err.message || "Some thing went wrong");
     }
+  };
+
+  const loaderpinner = () => {
+    return (
+      <div
+        style={{
+          width: "90%",
+          height: "50%",
+          minHeight: "400px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ThreeCircles
+          visible={true}
+          height="100"
+          width="100"
+          color="#4fa94d"
+          ariaLabel="three-circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  };
+
+  const noContentAvialble = () => {
+    return (
+      <div
+        style={{
+          width: "90%",
+          height: "50%",
+          minHeight: "400px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src="https://res.cloudinary.com/ducrzzdqj/image/upload/v1751386815/5928293_2953962_xv6ldo.jpg"
+          alt="no content"
+          style={{ width: "300px", aspectRatio: "1" }}
+        />
+        <h3 style={{ color: "var(--textBody)", fontSize: "1.8rem" }}>
+          <span style={{ color: "var(--successColor)" }}>NO </span> users
+          Register Yet
+        </h3>
+      </div>
+    );
+  };
+
+  const returnResultOnStatus = () => {
+    if (state.loading.users) {
+      return loaderpinner();
+    }
+    if (filteruser.length === 0) {
+      return noContentAvialble();
+    }
+    return (
+      <ScrollableBody>
+        {filteruser.map((users) => (
+          <UseList
+            key={users.id}
+            users={users}
+            updatingUserRoleToServer={updatingUserRoleToServer}
+            deletedUserFromServer={deletedUserFromServer}
+          />
+        ))}
+      </ScrollableBody>
+    );
   };
 
   return (
@@ -104,16 +178,7 @@ const UserManagement = () => {
           <div>Update Role</div>
           <div>Delete User</div>
         </StyledUserManagmentTableHeader>
-        <ScrollableBody>
-          {filteruser.map((users) => (
-            <UseList
-              key={users.id}
-              users={users}
-              updatingUserRoleToServer={updatingUserRoleToServer}
-              deletedUserFromServer={deletedUserFromServer}
-            />
-          ))}
-        </ScrollableBody>
+        {returnResultOnStatus()}
       </StyledUserManagementTableList>
     </StyledUserManagementMainContainer>
   );

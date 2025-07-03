@@ -12,6 +12,7 @@ import { ScrollableBody } from "../Ticket/ticketstyle";
 import useApiRequest from "../../ui/apiRequest";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { ThreeCircles } from "react-loader-spinner";
 
 const ApprovalRequest = () => {
   const [search, setSearch] = useState("");
@@ -35,8 +36,9 @@ const ApprovalRequest = () => {
       const statusUpdate = {
         status: "approved",
       };
+      console.log(id);
       const result = await makeApi({
-        url: `http://localhost:3000/api/solar/v1/users/approve/${id}`,
+        url: `https://solar-desk.onrender.com/api/solar/v1/users/approve/${id}`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,6 +58,81 @@ const ApprovalRequest = () => {
     } catch (err) {
       toast.error(err.message);
     }
+  };
+
+  const loaderpinner = () => {
+    return (
+      <div
+        style={{
+          width: "90%",
+          height: "50%",
+          minHeight: "400px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ThreeCircles
+          visible={true}
+          height="100"
+          width="100"
+          color="#4fa94d"
+          ariaLabel="three-circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  };
+
+  const noContentAvialble = () => {
+    return (
+      <div
+        style={{
+          width: "90%",
+          height: "50%",
+          minHeight: "400px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src="https://res.cloudinary.com/ducrzzdqj/image/upload/v1751386815/5928293_2953962_xv6ldo.jpg"
+          alt="no content"
+          style={{ width: "300px", aspectRatio: "1" }}
+        />
+        <h3 style={{ color: "var(--textBody)", fontSize: "1.8rem" }}>
+          <span style={{ color: "var(--successColor)" }}>NO </span>
+          approval request at present
+        </h3>
+      </div>
+    );
+  };
+
+  const returnResultOnStatus = () => {
+    if (state.loading.users) {
+      return loaderpinner();
+    }
+    if (searchUserData.length === 0) {
+      return noContentAvialble();
+    }
+    return (
+      <>
+        <ScrollableBody>
+          {searchUserData.map((pendingUser) => (
+            <AprovalList
+              key={pendingUser.id}
+              pendingUser={pendingUser}
+              handlingApprovalrequestToServer={handlingApprovalrequestToServer}
+              loadingStatus={isLoading}
+            />
+          ))}
+        </ScrollableBody>
+      </>
+    );
   };
 
   return (
@@ -87,16 +164,7 @@ const ApprovalRequest = () => {
           <div>Approval Status</div>
           <div>Account Approval</div>
         </StyledUserManagmentTableHeader>
-        <ScrollableBody>
-          {searchUserData.map((pendingUser) => (
-            <AprovalList
-              key={pendingUser.id}
-              pendingUser={pendingUser}
-              handlingApprovalrequestToServer={handlingApprovalrequestToServer}
-              loadingStatus={isLoading}
-            />
-          ))}
-        </ScrollableBody>
+        {returnResultOnStatus()}
       </StyledUserManagementTableList>
     </StyledUserManagementMainContainer>
   );
