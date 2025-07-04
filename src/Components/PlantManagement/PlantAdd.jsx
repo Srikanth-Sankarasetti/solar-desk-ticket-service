@@ -38,6 +38,7 @@ const PlantAdd = () => {
   const token = Cookies.get("token");
 
   const handleAddPlantSubmitForm = async (data) => {
+    console.log(data);
     try {
       const result = await makeApi({
         url: "https://solar-desk.onrender.com/api/solar/v1/plants",
@@ -49,6 +50,7 @@ const PlantAdd = () => {
         body: data,
       });
       if (result?.status === "success") {
+        console.log(result);
         const newplantAdd = [...state.plants, result.data.plant];
         dispatch({ type: ACTIONS.SET_PLANTS, payload: newplantAdd });
         toast.success("New plant added successfully");
@@ -92,8 +94,8 @@ const PlantAdd = () => {
             {...register("capacityKwp")}
           />
         </StyledInputContainer>
-        {errors.plantCapacity && (
-          <p style={{ color: "red" }}>{errors.plantCapacity.message}</p>
+        {errors.capacityKwp && (
+          <p style={{ color: "red" }}>{errors.capacityKwp.message}</p>
         )}
         <StyledInputContainer>
           <StyledRaisedTicketLable htmlFor="plantType">
@@ -129,7 +131,7 @@ const PlantAdd = () => {
             <option value="West">West</option>
           </StyledAddPlantSelect>
         </StyledInputContainer>
-        {errors.zone && <p style={{ color: "red" }}>{errors.zone.message}</p>}
+        {errors.Zone && <p style={{ color: "red" }}>{errors.Zone.message}</p>}
         <StyledInputContainer>
           <StyledRaisedTicketLable htmlFor="plantOwner">
             Plant Owner
