@@ -23,6 +23,7 @@ const ForgotPassowrd = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -40,6 +41,7 @@ const ForgotPassowrd = () => {
 
       if (result?.status === "success") {
         toast.success(result.message);
+        reset();
       }
     } catch (err) {
       toast.error(err.message);

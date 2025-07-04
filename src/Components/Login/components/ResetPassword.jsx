@@ -52,6 +52,8 @@ const ResetPassowrd = () => {
 
       if (response?.status === "success") {
         toast.success(`${response.message}, please login`);
+        setNewPassowrd("");
+        setConfirmPassword("");
         navigate("/login", { replace: true });
       }
     } catch (err) {
