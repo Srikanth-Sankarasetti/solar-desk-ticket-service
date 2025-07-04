@@ -51,7 +51,15 @@ const PlantAdd = () => {
       });
       if (result?.status === "success") {
         console.log(result);
-        const newplantAdd = [...state.plants, result.data.plant];
+        const filterDataPlants = {
+          id: result.data.plant._id,
+          plantName: result.data.plant.plantName,
+          plantType: result.data.plant.plantType,
+          capacityKwp: result.data.plant.capacityKwp,
+          ownerName: result.data.plant.plantOwner.name,
+          Zone: result.data.plant.Zone,
+        };
+        const newplantAdd = [...state.plants, filterDataPlants];
         dispatch({ type: ACTIONS.SET_PLANTS, payload: newplantAdd });
         toast.success("New plant added successfully");
         reset();

@@ -48,7 +48,7 @@ const Login = () => {
     });
 
     if (response?.status === "success") {
-      Cookies.set("token", response.token);
+      Cookies.set("token", response.token, { expires: 7 });
       navigate("/", { replace: true });
     }
   };
