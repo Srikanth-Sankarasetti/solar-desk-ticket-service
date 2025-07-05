@@ -74,8 +74,7 @@ const OverView = () => {
   ];
 
   const statusData = issueStatusData.filter((item) => item.value > 0);
-  console.log(topPlants);
-  console.log(overviewStats);
+
   return (
     <>
       <StyledOverViewMainContainer>
