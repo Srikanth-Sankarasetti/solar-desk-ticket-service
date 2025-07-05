@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../ui/themeContext";
+import { useGlobalUserContext, USERACTION } from "../../ui/userContext";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -37,10 +38,12 @@ const StyledThemeChangeButton = styled.button`
 
 const HeaderMenu = () => {
   const { isDark, setDark } = useContext(ThemeContext);
+  const { userDispatch } = useGlobalUserContext();
   const navigate = useNavigate();
 
   const handleLogoutFunction = () => {
     Cookies.remove("token");
+    userDispatch({ type: USERACTION.CLEAR_USER });
     navigate("/login", { replace: true });
   };
 

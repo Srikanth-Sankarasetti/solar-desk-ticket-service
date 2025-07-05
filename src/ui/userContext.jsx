@@ -14,6 +14,7 @@ const USERACTION = {
   SET_USER: "SET_USER",
   LOADING_USER: "LOADING_USER",
   ERROR_USER: "ERROR_USER",
+  CLEAR_USER: "CLEAR_USER",
 };
 
 const userDataReducer = (state, action) => {
@@ -31,6 +32,15 @@ const userDataReducer = (state, action) => {
       return { ...state, loading: true, error: null };
     case USERACTION.ERROR_USER:
       return { ...state, loading: false, error: action.payload.message };
+    case USERACTION.CLEAR_USER:
+      return {
+        ...state,
+        name: "",
+        image: "",
+        email: "",
+        loading: false,
+        error: null,
+      };
     default:
       return state;
   }

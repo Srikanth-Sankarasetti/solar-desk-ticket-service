@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 import { useGlobalUserContext } from "../../ui/userContext";
+import getuserRole from "../../utils/getuserRole";
 const StyledUserAvatar = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -22,13 +23,19 @@ const Avatar = styled.img`
 
 const UserAvatar = () => {
   const { loginuserstate } = useGlobalUserContext();
+  const { name } = getuserRole();
 
   return (
     <StyledUserAvatar>
-      <Avatar src={loginuserstate.image} alt={loginuserstate.name} />
-      <span>
-        Hi, {loginuserstate?.name ? loginuserstate.name : "Hello, User"}
-      </span>
+      <Avatar
+        src={
+          loginuserstate?.image
+            ? loginuserstate.image
+            : "https://res.cloudinary.com/ducrzzdqj/image/upload/v1748444223/default_wehzad.jpg"
+        }
+        alt={loginuserstate.name}
+      />
+      <span>Hi, {name}</span>
     </StyledUserAvatar>
   );
 };
