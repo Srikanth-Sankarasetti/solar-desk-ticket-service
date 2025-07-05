@@ -3,6 +3,7 @@ import {
   StyledUserRoleUpdateButton,
 } from "../UserManagement/userManagementStyle";
 import { RotatingLines } from "react-loader-spinner";
+import { TiTick } from "react-icons/ti";
 
 const AprovalList = ({
   pendingUser,
@@ -19,7 +20,7 @@ const AprovalList = ({
       <div>{pendingUser.role}</div>
       <div>{pendingUser.status}</div>
       <StyledUserRoleUpdateButton onClick={handleApproval}>
-        Approve Account{" "}
+        <TiTick title="approve account" />{" "}
         {loadingStatus && (
           <RotatingLines
             visible={true}

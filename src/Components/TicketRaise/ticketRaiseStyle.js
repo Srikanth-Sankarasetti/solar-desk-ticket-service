@@ -85,6 +85,7 @@ export const StyledRaisedTicketSubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;
 
 export const RiasedTiecketHand = styled(FaHandPointDown)`

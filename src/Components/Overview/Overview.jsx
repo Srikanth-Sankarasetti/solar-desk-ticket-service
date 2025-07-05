@@ -74,7 +74,8 @@ const OverView = () => {
   ];
 
   const statusData = issueStatusData.filter((item) => item.value > 0);
-
+  console.log(topPlants);
+  console.log(overviewStats);
   return (
     <>
       <StyledOverViewMainContainer>
@@ -183,70 +184,74 @@ const OverView = () => {
             />
           </StyledOverviewPiechartMainContainer>
           <StyledOverViewTopPlantContainer>
-            <div
-              style={{
-                fontSize: "2.5rem",
-                color: "var(--textBody)",
-                padding: "2rem 0 1rem 0",
-              }}
-            >
-              👇 Top 5 Generation loss Plants
-            </div>
-            <ul
-              style={{
-                marginTop: "1rem",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: "1rem",
-              }}
-            >
-              {topPlants.map((plant) => (
+            <div>
+              <div>
                 <div
-                  key={plant.plantName}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1.3rem",
+                    fontSize: "2.5rem",
+                    color: "var(--textBody)",
+                    padding: "2rem 0 1rem 0",
                   }}
                 >
-                  <li
-                    style={{
-                      color: "var(--textBody)",
-                      fontSize: "1.8rem",
-                      paddingBottom: "0.3rem",
-                    }}
-                  >
-                    {plant.plantName}
-                  </li>
-                  <li
-                    style={{
-                      color: "var(--buttonSecondaryText)",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    -Genration Loss:-{plant.totalGenerationLossKwh} Kwh
-                  </li>
-                  <li
-                    style={{
-                      color: "var(--buttonSecondaryText)",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    -Issues Count:- {plant.issueCount}
-                  </li>
-                  <li
-                    style={{
-                      color: "var(--buttonSecondaryText)",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    -Last Issue Date:-
-                    {new Date(plant.lastIssueDate).toLocaleDateString()}
-                  </li>
+                  👇 Top 5 Generation loss Plants
                 </div>
-              ))}
-            </ul>
+                <ul
+                  style={{
+                    marginTop: "1rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: "1rem",
+                  }}
+                >
+                  {topPlants.map((plant) => (
+                    <div
+                      key={plant.plantName}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1.3rem",
+                      }}
+                    >
+                      <li
+                        style={{
+                          color: "var(--textBody)",
+                          fontSize: "1.8rem",
+                          paddingBottom: "0.3rem",
+                        }}
+                      >
+                        {plant.plantName}
+                      </li>
+                      <li
+                        style={{
+                          color: "var(--buttonSecondaryText)",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        -Genration Loss:-{plant.totalGenerationLossKwh} Kwh
+                      </li>
+                      <li
+                        style={{
+                          color: "var(--buttonSecondaryText)",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        -Issues Count:- {plant.issueCount}
+                      </li>
+                      <li
+                        style={{
+                          color: "var(--buttonSecondaryText)",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        -Last Issue Date:-
+                        {new Date(plant.lastIssueDate).toLocaleDateString()}
+                      </li>
+                    </div>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </StyledOverViewTopPlantContainer>
         </StyledOverviewDashboard>
       </StyledOverViewMainContainer>

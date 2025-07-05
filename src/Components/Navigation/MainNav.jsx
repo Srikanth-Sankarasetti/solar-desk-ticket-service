@@ -53,8 +53,8 @@ const StyledNavlink = styled(NavLink)`
 const MainNav = () => {
   const { state } = useGlobalContext();
   const { role } = getuserRole();
-  const isAdmin = role === "admin" || role === "manager";
-
+  const isAdmin = role === "admin";
+  const isManager = role === "manager";
   const filterPendingUsers = state.users.filter(
     (user) => user.status === "pending"
   );
@@ -74,7 +74,7 @@ const MainNav = () => {
             <span>Tickets</span>
           </StyledNavlink>
         </li>
-        {isAdmin && (
+        {(isAdmin || isManager) && (
           <>
             <li>
               <StyledNavlink to="raise-tickets">
@@ -82,34 +82,43 @@ const MainNav = () => {
                 <span>Raise Ticket</span>
               </StyledNavlink>
             </li>
-            <li>
-              <StyledNavlink to="user-management">
-                <HiOutlineUsers />
-                <span>User Management</span>
-              </StyledNavlink>
-            </li>
-            <li>
-              <StyledNavlink to="approval-requests">
-                <FaClipboardCheck />
-                <span>Approval Requests </span>
-                {totalApprovalRequest > 0 && (
-                  <span
-                    style={{
-                      backgroundColor: "green",
-                      borderRadius: "50%",
-                      padding: "0.5rem",
-                      fontSize: "1.3rem",
-                      color: "#ffff",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    {totalApprovalRequest}
-                  </span>
-                )}
-              </StyledNavlink>
-            </li>
+          </>
+        )}
+        {isAdmin && (
+          <li>
+            <StyledNavlink to="user-management">
+              <HiOutlineUsers />
+              <span>User Management</span>
+            </StyledNavlink>
+          </li>
+        )}
+        {isAdmin && (
+          <li>
+            <StyledNavlink to="approval-requests">
+              <FaClipboardCheck />
+              <span>Approval Requests </span>
+              {totalApprovalRequest > 0 && (
+                <span
+                  style={{
+                    backgroundColor: "green",
+                    borderRadius: "50%",
+                    padding: "0.5rem",
+                    fontSize: "1.3rem",
+                    color: "#ffff",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {totalApprovalRequest}
+                </span>
+              )}
+            </StyledNavlink>
+          </li>
+        )}
+        {(isAdmin || isManager) && (
+          <>
+            {" "}
             <li>
               <StyledNavlink to="manage-plants">
                 <FaSolarPanel />

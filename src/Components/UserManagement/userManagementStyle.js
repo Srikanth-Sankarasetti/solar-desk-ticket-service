@@ -83,6 +83,9 @@ export const StyledUserRoleUpdateButton = styled.button`
   border-radius: 10px;
   color: var(--buttonPrimaryText);
   background-color: var(--buttonPrimarybg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   cursor: pointer;
   @media (max-width: 1092px) {

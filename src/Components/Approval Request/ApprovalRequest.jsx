@@ -162,7 +162,7 @@ const ApprovalRequest = () => {
           <div>Email</div>
           <div>Role</div>
           <div>Approval Status</div>
-          <div>Account Approval</div>
+          <div>Action</div>
         </StyledUserManagmentTableHeader>
         {returnResultOnStatus()}
       </StyledUserManagementTableList>

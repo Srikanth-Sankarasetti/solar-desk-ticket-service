@@ -74,7 +74,7 @@ const PlantItems = ({ plantDetails, toggleExpand, isOpenPlus, role }) => {
       const created = new Date(plantDetails.createdAt);
       const solved = new Date(plantDetails.solvedAt);
       const daydiff = solved - created;
-      const days = Math.ceil(daydiff / (1000 * 60 * 60 * 24));
+      const days = Math.ceil(daydiff / (1000 * 60 * 60));
       return days;
     }
   };
@@ -151,9 +151,9 @@ const PlantItems = ({ plantDetails, toggleExpand, isOpenPlus, role }) => {
           </StyledResolvedItemContainer>
           <StyledResolvedItemContainer>
             <StyledResolvedHeaderData>
-              Turn Arround Time
+              Turn Arround Time (Hours)
             </StyledResolvedHeaderData>
-            <StyledResolvedParaData>{getDays()} Days</StyledResolvedParaData>
+            <StyledResolvedParaData>{getDays()} Hours</StyledResolvedParaData>
           </StyledResolvedItemContainer>
           <StyledResolvedItemContainer>
             <StyledResolvedHeaderData>Category</StyledResolvedHeaderData>

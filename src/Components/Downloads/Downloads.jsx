@@ -9,6 +9,7 @@ import { useGlobalContext } from "../../ui/globalContext";
 import Cookies from "js-cookie";
 import { StyledDownloadInput, StyledDownloadContainer } from "./downloadStyles";
 import { RotatingLines } from "react-loader-spinner";
+import getuserRole from "../../utils/getuserRole";
 
 import {
   StyledRaisedTicketForm,
@@ -44,6 +45,7 @@ const Downloads = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(false);
   const { state } = useGlobalContext();
+  const { role } = getuserRole();
 
   const ref = useRef();
   const token = Cookies.get("token");
@@ -161,34 +163,43 @@ const Downloads = () => {
             <option value="Capex">Capex</option>
           </StyledAddPlantSelect>
         </StyledDownloadContainer>
-        <StyledDownloadContainer>
-          <StyledRaisedTicketLable>Zone</StyledRaisedTicketLable>
-          <StyledAddPlantSelect defaultValue="" id="zone" {...register("zone")}>
-            <option value="" disabled>
-              Select Zone
-            </option>
-            <option value="East">East</option>
-            <option value="North">North</option>
-            <option value="South">South</option>
-            <option value="West">West</option>
-          </StyledAddPlantSelect>
-        </StyledDownloadContainer>
-        <StyledDownloadContainer>
-          <StyledRaisedTicketLable htmlFor="plantOwner">
-            Plant Owner
-          </StyledRaisedTicketLable>
-          <Controller
-            name="plantOwner"
-            control={control}
-            render={({ field }) => (
-              <UserSelect
-                {...field}
-                options={state.users}
-                placeholder="Select a Owner"
-              />
-            )}
-          />
-        </StyledDownloadContainer>
+        {(role === "admin" || role === "manager") && (
+          <StyledDownloadContainer>
+            <StyledRaisedTicketLable>Zone</StyledRaisedTicketLable>
+            <StyledAddPlantSelect
+              defaultValue=""
+              id="zone"
+              {...register("zone")}
+            >
+              <option value="" disabled>
+                Select Zone
+              </option>
+              <option value="East">East</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="West">West</option>
+            </StyledAddPlantSelect>
+          </StyledDownloadContainer>
+        )}
+        {(role === "admin" || role === "manager") && (
+          <StyledDownloadContainer>
+            <StyledRaisedTicketLable htmlFor="plantOwner">
+              Plant Owner
+            </StyledRaisedTicketLable>
+            <Controller
+              name="plantOwner"
+              control={control}
+              render={({ field }) => (
+                <UserSelect
+                  {...field}
+                  options={state.users}
+                  placeholder="Select a Owner"
+                />
+              )}
+            />
+          </StyledDownloadContainer>
+        )}
+
         <StyledRaisedTicketSubmitButton type="submit">
           DownLoad Report{" "}
           {loadingStatus && (

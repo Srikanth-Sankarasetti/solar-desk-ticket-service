@@ -60,8 +60,9 @@ const PasswordUpdate = () => {
         <StyeduserUpdateContainer>
           <StyeduserUpdateLabel>current Password</StyeduserUpdateLabel>
           <StyeduserUpdateInput
-            type="text"
+            type="password"
             placeholder="Enter the old password"
+            autoComplete="current-password"
             {...register("currentPassword", {
               required: "* current password required",
             })}
@@ -79,6 +80,7 @@ const PasswordUpdate = () => {
           <StyeduserUpdateInput
             type="password"
             placeholder="Enter the new password"
+            autoComplete="new-password"
             {...register("password", {
               required: "* New password required",
               validate: (value) =>
@@ -95,8 +97,9 @@ const PasswordUpdate = () => {
         <StyeduserUpdateContainer>
           <StyeduserUpdateLabel>Confirm Password</StyeduserUpdateLabel>
           <StyeduserUpdateInput
-            type="text"
+            type="password"
             placeholder="Confirm password"
+            autoComplete="new-password"
             {...register("confirmPassword", {
               required: "* Password confirmation required",
               validate: (value) =>
