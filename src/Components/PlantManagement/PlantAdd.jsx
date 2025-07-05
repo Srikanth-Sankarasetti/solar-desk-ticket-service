@@ -19,8 +19,10 @@ import {
 import {
   StyledAddPlantContainer,
   StyledAddPlantSelect,
+  StyledRotateArrow,
 } from "./plantManagementStyle";
 import { useGlobalContext, ACTIONS } from "../../ui/globalContext";
+import { useState } from "react";
 
 const PlantAdd = () => {
   const {
@@ -34,6 +36,8 @@ const PlantAdd = () => {
   });
   const { isLoading, error, makeApi } = useApiRequest();
   const { state, dispatch } = useGlobalContext();
+  const [isOpen, setOpen] = useState(false);
+  const [zoneOpen, setZoneOpen] = useState(false);
 
   const token = Cookies.get("token");
 
@@ -112,6 +116,7 @@ const PlantAdd = () => {
           <StyledAddPlantSelect
             id="plantType"
             defaultValue=""
+            onClick={() => setOpen((prev) => !prev)}
             {...register("plantType")}
           >
             <option value="" disabled>
@@ -121,6 +126,7 @@ const PlantAdd = () => {
             <option value="Renew-Opex">Renew-Opex</option>
             <option value="Capex">Capex</option>
           </StyledAddPlantSelect>
+          <StyledRotateArrow $isOpen={isOpen} />
         </StyledInputContainer>
         {errors.plantType && (
           <p style={{ color: "red" }}>{errors.plantType.message}</p>
@@ -129,7 +135,12 @@ const PlantAdd = () => {
           <StyledRaisedTicketLable htmlFor="zone">
             Add Zone
           </StyledRaisedTicketLable>
-          <StyledAddPlantSelect defaultValue="" id="zone" {...register("Zone")}>
+          <StyledAddPlantSelect
+            defaultValue=""
+            onClick={() => setZoneOpen((prev) => !prev)}
+            id="zone"
+            {...register("Zone")}
+          >
             <option value="" disabled>
               Select Zone
             </option>
@@ -138,6 +149,7 @@ const PlantAdd = () => {
             <option value="South">South</option>
             <option value="West">West</option>
           </StyledAddPlantSelect>
+          <StyledRotateArrow $isOpen={zoneOpen} />
         </StyledInputContainer>
         {errors.Zone && <p style={{ color: "red" }}>{errors.Zone.message}</p>}
         <StyledInputContainer>

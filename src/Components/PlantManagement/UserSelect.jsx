@@ -39,7 +39,7 @@ const UserSelect = forwardRef(
       <PlantselectFormContainer ref={dropDownRef}>
         <StyledPlantSelectionButtonContainer onClick={() => setOpen(!isOpen)}>
           <span>{selectedPlant?.name || placeholder}</span>
-          <StyledChevronDown data-is-open={isOpen} />
+          <StyledChevronDown $isOpen={isOpen} />
         </StyledPlantSelectionButtonContainer>
         {isOpen && (
           <StyledSlectFormContainer>

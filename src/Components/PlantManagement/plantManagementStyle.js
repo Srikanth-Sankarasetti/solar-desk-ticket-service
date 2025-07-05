@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { NavLink } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 
 export const StyledPlantManagementMainContainer = styled.div`
   display: flex;
@@ -52,6 +53,16 @@ export const StyledAddPlantSelect = styled.select`
     border-bottom: 3px solid var(--buttonPrimarybg);
     outline-offset: -1px;
   }
+  appearance: none;
 `;
 
 export const StyledEditPlantInput = styled.input``;
+
+export const StyledRotateArrow = styled(ChevronDown)`
+  transform: translate(-50%)
+    ${({ $isOpen }) => ($isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+  transition: all 200ms ease-in;
+  position: absolute;
+  top: 55%;
+  right: 0;
+`;

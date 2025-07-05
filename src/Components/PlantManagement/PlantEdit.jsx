@@ -16,11 +16,14 @@ import {
 import {
   StyledAddPlantContainer,
   StyledAddPlantSelect,
+  StyledRotateArrow,
 } from "./plantManagementStyle";
+
 import { useGlobalContext, ACTIONS } from "../../ui/globalContext";
 import useApiRequest from "../../ui/apiRequest";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const PlantEdit = () => {
   const {
@@ -34,8 +37,9 @@ const PlantEdit = () => {
   });
   const { state, dispatch } = useGlobalContext();
   const { isLoading, error, makeApi } = useApiRequest();
-
+  const [isOpen, setOpen] = useState(false);
   const token = Cookies.get("token");
+
   const handleAddPlantSubmitForm = async (data) => {
     try {
       const result = await makeApi({
@@ -48,6 +52,7 @@ const PlantEdit = () => {
         body: data,
       });
       if (result?.status === "success") {
+        console.log(result);
         const updatedPlants = state.plants.map((opt) => {
           if (opt._id === result.data.plant._id) {
             const update = {
@@ -55,7 +60,7 @@ const PlantEdit = () => {
               plantName: result.data.plant.plantName,
               plantType: result.data.plant.plantType,
               capacityKwp: result.data.plant.capacityKwp,
-              ownerName: result.data.plant.plantOwner.name,
+              ownerName: result.data.plant.plantOwner?.name,
               Zone: result.data.plant.Zone,
             };
             return { ...opt, ...update };
@@ -120,6 +125,7 @@ const PlantEdit = () => {
           <StyledAddPlantSelect
             id="plantType"
             defaultValue=""
+            onClick={() => setOpen((prev) => !prev)}
             {...register("plantType")}
           >
             <option value="" disabled>
@@ -129,6 +135,7 @@ const PlantEdit = () => {
             <option value="Renew-Opex">Renew-Opex</option>
             <option value="Capex">Capex</option>
           </StyledAddPlantSelect>
+          <StyledRotateArrow $isOpen={isOpen} />
         </StyledInputContainer>
         {errors.plantType && (
           <p style={{ color: "red" }}>{errors.plantType.message}</p>

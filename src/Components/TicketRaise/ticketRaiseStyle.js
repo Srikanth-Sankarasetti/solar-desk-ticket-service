@@ -42,6 +42,7 @@ export const StyledInputContainer = styled.div`
   gap: 1rem;
   width: 100%;
   font-size: 1.4rem;
+  position: relative;
 `;
 export const StyledRaisedTicketLable = styled.label`
   color: var(--formText);
